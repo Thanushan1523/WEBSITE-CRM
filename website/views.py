@@ -5,6 +5,7 @@ from .forms import SignUpForm, AddRecordForm
 from .models import Record
 # Create your views here.
 def home(request):
+    records =Record.objects.all()
     if request.method == 'POST':
         username=request.POST['username']
         password=request.POST['password'] 
@@ -17,7 +18,7 @@ def home(request):
             messages.success(request ,'there was an error')
             return redirect ('home')
     else:
-        return render (request , 'home.html' , {})
+        return render (request , 'home.html' , {'records':records})
 
 
 def login_user(request):
