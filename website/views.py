@@ -56,3 +56,15 @@ def customer_record (request ,pk ):
     else:
         messages.success(request ,"you Must Be Login")
         return redirect ('home')
+    
+
+def delete_record (request ,pk):
+         
+        if request.user.is_authenticated:
+            delete_it =Record.objects.get(id=pk)
+            delete_it.delete()
+            messages.success(request ,"records deleted suceesfully ")
+            return redirect ('home')
+        else:
+            messages.success(request ,"you Must Be Login ")
+            return redirect ('home')
